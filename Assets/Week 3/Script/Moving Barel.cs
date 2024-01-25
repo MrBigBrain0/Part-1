@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MovingBarel : MonoBehaviour
 {
-    public SpriteRenderer render;
-    public Sprite barrelUp;
-    public Sprite barrelDown;
+    public GameObject barrelUp;
+    public GameObject barrelDown;
 
     SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-       
+        barrelUp.SetActive(true);
+        barrelDown.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,13 +23,11 @@ public class MovingBarel : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("barrel_blue"))
+        
+        if (barrelUp.activeInHierarchy)
         {
-            render.sprite = barrelUp;
-        }
-        else
-        {
-            render.sprite = barrelDown;
+            barrelDown.SetActive(true);
+            barrelUp.SetActive(false);
         }
     }
 }
